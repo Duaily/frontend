@@ -2,13 +2,15 @@ import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import row_logo from "@assets/row_logo.svg";
 import { MenuItemType } from "@types";
+import { useNavigate } from "react-router-dom";
 
-interface Props {
+interface NavbarProps {
   clickedMenu: MenuItemType;
   setClickedMenu: React.Dispatch<React.SetStateAction<MenuItemType>>;
 }
 
-function Navbar({ clickedMenu, setClickedMenu }: Props) {
+function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
+  const navigate = useNavigate();
   const underlinRef = useRef<HTMLDivElement>(null);
   const duailyInfoRef = useRef<HTMLDivElement>(null);
   const tradeRef = useRef<HTMLDivElement>(null);
@@ -63,26 +65,44 @@ function Navbar({ clickedMenu, setClickedMenu }: Props) {
         <MenuItem>
           <p
             ref={duailyInfoRef}
-            onClick={(e) => onMenuClick(e, "duaily intro")}
+            onClick={(e) => {
+              navigate("/");
+              onMenuClick(e, "duaily intro");
+            }}
           >
             듀얼리 소개
           </p>
         </MenuItem>
         <MenuItem>
-          <p ref={tradeRef} onClick={(e) => onMenuClick(e, "trade")}>
+          <p
+            ref={tradeRef}
+            onClick={(e) => {
+              navigate("/house");
+              onMenuClick(e, "trade");
+            }}
+          >
             빈 집 거래
           </p>
         </MenuItem>
         <MenuItem>
           <p
             ref={locationInfoRef}
-            onClick={(e) => onMenuClick(e, "location intro")}
+            onClick={(e) => {
+              navigate("/location");
+              onMenuClick(e, "location intro");
+            }}
           >
             지역 소개
           </p>
         </MenuItem>
         <MenuItem>
-          <p ref={communityRef} onClick={(e) => onMenuClick(e, "community")}>
+          <p
+            ref={communityRef}
+            onClick={(e) => {
+              navigate("/community");
+              onMenuClick(e, "community");
+            }}
+          >
             커뮤니티
           </p>
         </MenuItem>
@@ -111,10 +131,11 @@ const LogoContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   place-items: center;
   width: 100%;
-  height: 120px;
+  height: 100px;
 `;
 const LogoImage = styled.img.attrs({ src: row_logo, alt: "logo" })`
   cursor: pointer;
+  -webkit-user-drag: none;
   &:hover {
     opacity: 0.8;
   }
