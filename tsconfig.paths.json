@@ -6,7 +6,8 @@
       "@pages/*": ["src/pages/*"],
       "@assets/*": ["src/assets/*"],
       "@types": ["src/types"],
-      "@apis/*": ["src/apis/*"]
+      "@apis/*": ["src/apis/*"],
+      "@utils/*": ["src/utils/*"]
     }
   }
 }
