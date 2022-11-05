@@ -3,6 +3,7 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import processCount from "@utils/processCount";
+import { motion } from "framer-motion";
 
 interface HouseCardProps {
   houseImage: string;
@@ -17,7 +18,7 @@ interface HouseCardProps {
 
 function HouseCard(props: HouseCardProps) {
   return (
-    <CardContainer>
+    <CardContainer whileHover={{ scale: 1.01, opacity: 0.8 }}>
       <CardImage img_src={props.houseImage} />
       <CardTitle>{props.title}</CardTitle>
       <CardInfoBox>
@@ -38,7 +39,7 @@ function HouseCard(props: HouseCardProps) {
 
 export default HouseCard;
 
-const CardContainer = styled.div`
+const CardContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

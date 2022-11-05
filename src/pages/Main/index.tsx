@@ -1,18 +1,22 @@
 import React, { useEffect } from "react";
 import jumbotImage2 from "@assets/jumboImage2.svg";
+import logo from "@assets/logo.svg";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { MenuItemType } from "@types";
 import { opacityVariants } from "@utils/variants";
-import { dummy_house_data } from "@utils/dummy";
+import { dummy_house_data, dummy_review_data } from "@utils/dummy";
 import { useNavigate } from "react-router-dom";
 import HouseCard from "@components/HouseCard";
+import ReviewCard from "@components/ReviewCard";
+import Footer from "@components/Footer";
 
 interface MainProps {
   setClickedMenu: React.Dispatch<React.SetStateAction<MenuItemType>>;
 }
 
-const DUMMY_DATA = dummy_house_data;
+const DUMMY_HOUSE_DATA = dummy_house_data;
+const DUMMY_REVIEW_DATA = dummy_review_data;
 
 function Main({ setClickedMenu }: MainProps) {
   const navigate = useNavigate();
@@ -32,8 +36,9 @@ function Main({ setClickedMenu }: MainProps) {
           </HouseLink>
         </HouseInfo>
         <HouseCardContainer>
-          {DUMMY_DATA.map((house) => (
+          {DUMMY_HOUSE_DATA.map((house, idx) => (
             <HouseCard
+              key={idx}
               houseImage={house.houseImage}
               title={house.title}
               location={house.location}
@@ -46,6 +51,33 @@ function Main({ setClickedMenu }: MainProps) {
           ))}
         </HouseCardContainer>
       </HouseSection>
+      <ReviewSection>
+        <ReviewInfo>
+          <ReviewTitle>듀얼 라이프 생생 후기</ReviewTitle>
+          <ReviewLink onClick={() => navigate("/community")}>
+            후기 더보기 &gt;
+          </ReviewLink>
+        </ReviewInfo>
+        <ReviewCardContainer>
+          {DUMMY_REVIEW_DATA.map((review, idx) => (
+            <ReviewCard
+              key={idx}
+              imageUrl={review.imageUrl}
+              title={review.title}
+              previewText={review.previewText}
+              user={review.user}
+            />
+          ))}
+        </ReviewCardContainer>
+        <BottomTextContainer>
+          <img src={logo} alt="logo" />
+          <BottomText>
+            <div>듀얼라이프 실현,</div>
+            <div>이제는 듀얼리가 해결해드릴게요.</div>
+          </BottomText>
+        </BottomTextContainer>
+      </ReviewSection>
+      <Footer />
     </Container>
   );
 }
@@ -96,4 +128,35 @@ const HouseCardContainer = styled.div`
   column-gap: 30px;
   row-gap: 70px;
   margin-top: 55px;
+`;
+const ReviewSection = styled(HouseSection)`
+  background-color: #ffb8000c;
+`;
+const ReviewInfo = styled(HouseInfo)``;
+const ReviewTitle = styled(HouseTitle)`
+  color: ${(props) => props.theme.green_color};
+`;
+const ReviewLink = styled(HouseLink)`
+  color: ${(props) => props.theme.green_color};
+`;
+const ReviewCardContainer = styled(HouseCardContainer)``;
+const BottomTextContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 150px 0 110px 0;
+  height: 100px;
+`;
+const BottomText = styled.h1`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 30px;
+  height: 100%;
+  color: ${(props) => props.theme.green_color};
+  font-size: 40px;
+  font-weight: 900;
+  & > div {
+    display: flex;
+    align-items: center;
+  }
 `;
