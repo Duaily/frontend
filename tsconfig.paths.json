@@ -7,7 +7,8 @@
       "@assets/*": ["src/assets/*"],
       "@types": ["src/types"],
       "@apis/*": ["src/apis/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@atoms/*": ["src/atoms/*"]
     }
   }
 }

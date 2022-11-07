@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import row_logo from "@assets/row_logo.svg";
 import { MenuItemType } from "@types";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { isLoginAtom } from "@atoms/atom";
 
 interface NavbarProps {
   clickedMenu: MenuItemType;
@@ -10,12 +13,19 @@ interface NavbarProps {
 }
 
 function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
+  const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
   const navigate = useNavigate();
   const underlinRef = useRef<HTMLDivElement>(null);
   const duailyInfoRef = useRef<HTMLDivElement>(null);
   const tradeRef = useRef<HTMLDivElement>(null);
   const locationInfoRef = useRef<HTMLDivElement>(null);
   const communityRef = useRef<HTMLDivElement>(null);
+  const onLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    delete axios.defaults.headers.common["Authorization"];
+    setIsLogin(false);
+  };
   const onMenuClick = (
     e: React.MouseEvent<HTMLDivElement>,
     menu: MenuItemType
@@ -53,11 +63,17 @@ function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
         <div />
         <LogoImage />
         <div>
-          <NavbarButtons>
-            <button>로그인</button>
-            <p>|</p>
-            <button>회원가입</button>
-          </NavbarButtons>
+          {isLogin ? (
+            <NavbarButtons>
+              <button>마이페이지</button>
+              <p>|</p>
+              <button onClick={onLogout}>로그아웃</button>
+            </NavbarButtons>
+          ) : (
+            <NavbarButtons>
+              <button onClick={() => navigate("/login")}>로그인</button>
+            </NavbarButtons>
+          )}
         </div>
       </LogoContainer>
       <MenuContainer>

@@ -6,6 +6,7 @@ import { RecoilRoot } from "recoil";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 import App from "./App";
+import "@apis/axios";
 
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,

@@ -36,17 +36,16 @@ function Main({ setClickedMenu }: MainProps) {
           </HouseLink>
         </HouseInfo>
         <HouseCardContainer>
-          {DUMMY_HOUSE_DATA.map((house, idx) => (
+          {DUMMY_HOUSE_DATA.map((house) => (
             <HouseCard
-              key={idx}
-              houseImage={house.houseImage}
+              key={house.id}
+              houseImage={house.imageUrl}
               title={house.title}
               location={house.location}
-              min_price={house.min_price}
-              max_price={house.max_price}
+              min_price={house.minPrice}
+              max_price={house.maxPrice}
               upload_date={house.upload_date}
               author={house.author}
-              status={house.status}
             />
           ))}
         </HouseCardContainer>
@@ -59,9 +58,9 @@ function Main({ setClickedMenu }: MainProps) {
           </ReviewLink>
         </ReviewInfo>
         <ReviewCardContainer>
-          {DUMMY_REVIEW_DATA.map((review, idx) => (
+          {DUMMY_REVIEW_DATA.map((review) => (
             <ReviewCard
-              key={idx}
+              key={review.id}
               imageUrl={review.imageUrl}
               title={review.title}
               previewText={review.previewText}

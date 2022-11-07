@@ -13,7 +13,6 @@ interface HouseCardProps {
   max_price: number;
   upload_date: Date;
   author: string;
-  status: boolean;
 }
 
 function HouseCard(props: HouseCardProps) {
