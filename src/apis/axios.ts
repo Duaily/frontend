@@ -1,6 +1,9 @@
 import axios, { AxiosError } from "axios";
 
-axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development"
+    ? process.env.REACT_APP_DEV_BASE_URL
+    : process.env.REACT_APP_PROD_BASE_URL;
 
 let refresh = false;
 
