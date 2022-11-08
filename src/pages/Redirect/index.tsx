@@ -13,6 +13,7 @@ function Redirect() {
   useEffect(() => {
     kakaoLogin(code || "")
       .then((res) => {
+        console.log(res);
         axios.defaults.headers.common[
           "Authorization"
         ] = `${res.grantType} ${res.accessToken}`;
@@ -24,6 +25,7 @@ function Redirect() {
           "refreshToken",
           `${res.grantType} ${res.accessToken}`
         );
+        console.log(res.init);
         setIsLogin(true);
         navigate("/");
       })
