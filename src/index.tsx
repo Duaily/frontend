@@ -1,10 +1,12 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 import App from "./App";
+import "@apis/axios";
 
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
@@ -33,7 +35,10 @@ const GlobalStyle = createGlobalStyle`
     display: block;
   }
   body {
-    line-height: 1;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
   }
   ol, ul {
     list-style: none;
@@ -52,6 +57,7 @@ const GlobalStyle = createGlobalStyle`
   }
   * {
     box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
   }
   a {
     text-decoration: none;
@@ -71,6 +77,7 @@ root.render(
         <ThemeProvider theme={theme}>
           <GlobalStyle />
           <App />
+          <ReactQueryDevtools />
         </ThemeProvider>
       </QueryClientProvider>
     </RecoilRoot>
