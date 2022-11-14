@@ -144,7 +144,7 @@ const Container = styled.div`
 `;
 const LogoContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
   place-items: center;
   width: 100%;
   height: 100px;
@@ -160,7 +160,7 @@ const NavbarButtons = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
-  margin-left: 100px;
+  margin-left: 30px;
   & > p {
     margin-top: 3px;
     font-size: 16px;
@@ -194,7 +194,7 @@ const MenuItem = styled.div`
   & > p {
     padding: 5px;
     color: ${(props) => props.theme.brown_color};
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     cursor: pointer;
     opacity: 0.8;
