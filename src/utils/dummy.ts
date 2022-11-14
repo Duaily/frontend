@@ -35,6 +35,15 @@ export const dummy_review_data: DummyReview[] = [
 일상에 지친 저에게 힐링이 되어준 듀얼리는 삶의 낙입니다.`,
     user: "듀얼리 최고",
   },
+  {
+    id: 3,
+    imageUrl: "https://picsum.photos/450/450",
+    title: `도시에서 즐기지 못한 일상,
+듀얼리와 함께 시작했어요!`,
+    previewText: `듀얼리를 통해 듀얼 라이프를 알게 되었어요. 
+일상에 지친 저에게 힐링이 되어준 듀얼리는 삶의 낙입니다.`,
+    user: "듀얼리 최고",
+  },
 ];
 
 export const dummy_house_data: DummyHouse[] = [

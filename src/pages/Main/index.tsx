@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import jumbotImage2 from "@assets/jumboImage2.svg";
+import jumbotImage2 from "@assets/jumboImage3.svg";
 import logo from "@assets/logo.svg";
 import styled from "styled-components";
 import { motion } from "framer-motion";
@@ -25,9 +25,7 @@ function Main({ setClickedMenu }: MainProps) {
   }, [setClickedMenu]);
   return (
     <Container variants={opacityVariants} initial="initial" animate="mount">
-      <JumbotronSection>
-        <img style={{ height: "800px" }} src={jumbotImage2} alt="jumbo" />
-      </JumbotronSection>
+      <JumbotronSection />
       <HouseSection>
         <HouseInfo>
           <HouseTitle>빈 집 매물</HouseTitle>
@@ -91,7 +89,11 @@ const Container = styled(motion.div)`
 `;
 const JumbotronSection = styled.div`
   width: 100%;
-  height: 800px;
+  height: 500px;
+  background-image: url(${jumbotImage2});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 const HouseSection = styled.div`
   width: 100%;
@@ -107,14 +109,14 @@ const HouseInfo = styled.div`
 `;
 const HouseTitle = styled.h1`
   color: ${(props) => props.theme.orange_color};
-  font-size: 40px;
+  font-size: 24px;
   font-weight: 900;
   text-decoration: underline;
   text-underline-position: under;
 `;
 const HouseLink = styled.p`
   color: ${(props) => props.theme.orange_color};
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 900;
   cursor: pointer;
   &:hover {
@@ -123,8 +125,9 @@ const HouseLink = styled.p`
 `;
 const HouseCardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 25px;
+  column-gap: 20px;
   row-gap: 70px;
   margin-top: 55px;
 `;
@@ -150,9 +153,10 @@ const BottomText = styled.h1`
   flex-direction: column;
   justify-content: space-between;
   margin-left: 30px;
+  padding: 10px 0;
   height: 100%;
   color: ${(props) => props.theme.green_color};
-  font-size: 40px;
+  font-size: 24px;
   font-weight: 900;
   & > div {
     display: flex;

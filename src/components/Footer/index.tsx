@@ -46,7 +46,7 @@ const Section1 = styled.div`
 `;
 const Slogan = styled.div`
   line-height: 2;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 900;
   white-space: pre-wrap;
   word-break: break-all;
@@ -58,13 +58,14 @@ const Links = styled.div`
   height: 185px;
   font-weight: bold;
   & > a {
-    font-size: 18px;
+    font-size: 14px;
     &:hover {
       opacity: 0.8;
     }
   }
 `;
 const CopyRight = styled.div`
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 400;
   line-height: 2;
 `;
