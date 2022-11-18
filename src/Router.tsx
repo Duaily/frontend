@@ -11,6 +11,7 @@ import styled from "styled-components";
 import Redirect from "@pages/Redirect";
 import HouseDetail from "@pages/HouseDetail";
 import HousePost from "@pages/HousePost";
+import Process from "@pages/Process";
 
 function Router() {
   const [menuState, setMenuState] = useState<MenuItemType>("duaily intro");
@@ -40,6 +41,7 @@ function Router() {
           />
           <Route path="/auth/kakao" element={<Redirect />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/process" element={<Process />} />
         </Routes>
       </ContentContainer>
     </BrowserRouter>
