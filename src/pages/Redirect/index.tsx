@@ -23,7 +23,7 @@ function Redirect() {
         );
         localStorage.setItem(
           "refreshToken",
-          `${res.grantType} ${res.accessToken}`
+          `${res.grantType} ${res.refreshToken}`
         );
         console.log(res.init);
         setIsLogin(true);

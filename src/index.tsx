@@ -71,15 +71,15 @@ const root = ReactDOM.createRoot(
 const client = new QueryClient();
 
 root.render(
-  <React.StrictMode>
-    <RecoilRoot>
-      <QueryClientProvider client={client}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <App />
-          <ReactQueryDevtools />
-        </ThemeProvider>
-      </QueryClientProvider>
-    </RecoilRoot>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <RecoilRoot>
+    <QueryClientProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <App />
+        <ReactQueryDevtools />
+      </ThemeProvider>
+    </QueryClientProvider>
+  </RecoilRoot>
+  // </React.StrictMode>
 );

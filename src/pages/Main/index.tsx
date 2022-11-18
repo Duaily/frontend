@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import jumbotImage2 from "@assets/jumboImage3.svg";
+import mainImage from "@assets/mainImage.svg";
 import logo from "@assets/logo.svg";
 import styled from "styled-components";
 import { motion } from "framer-motion";
@@ -26,6 +26,21 @@ function Main({ setClickedMenu }: MainProps) {
   return (
     <Container variants={opacityVariants} initial="initial" animate="mount">
       <JumbotronSection />
+      <JumbotronText>
+        <p>
+          듀얼리는 도시의 삶과 시골의 삶을 향수할 수 있는 듀얼라이프의 삶의
+          방식을 돕는 플랫폼입니다.
+        </p>
+        <p>
+          듀얼리는 빈집 중개를 통해 도심을 벗어난 사람들의 듀얼라이프 이상을
+          실현시킴에서
+        </p>
+        <p>나아가 지역의 빈집 문제를 해결할 수 있습니다.</p>
+        <p>
+          당신의 듀얼라이프 꿈이 현실이 될 수 있도록 듀얼리가 함께 하겠습니다.
+        </p>
+        <div />
+      </JumbotronText>
       <HouseSection>
         <HouseInfo>
           <HouseTitle>빈 집 매물</HouseTitle>
@@ -89,16 +104,32 @@ const Container = styled(motion.div)`
 `;
 const JumbotronSection = styled.div`
   width: 100%;
-  height: 500px;
-  background-image: url(${jumbotImage2});
+  height: 634px;
+  background-image: url(${mainImage});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 `;
+const JumbotronText = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 115px 0;
+  & > p {
+    font-size: 1.25rem;
+    line-height: 2.5em;
+  }
+  & > div {
+    margin-top: 80px;
+    width: 300px;
+    height: 1px;
+    background-color: black;
+  }
+`;
 const HouseSection = styled.div`
   width: 100%;
   padding: 60px 120px;
-  background-color: #0453450c;
 `;
 const HouseInfo = styled.div`
   display: flex;
