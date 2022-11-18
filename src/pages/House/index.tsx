@@ -169,14 +169,13 @@ const TotalPostBox = styled.div`
   width: 100%;
   height: 60px;
   margin-bottom: 40px;
-  border-bottom: 8px solid black;
   font-size: 32px;
   font-weight: 700;
 `;
 
 const HouseCardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   column-gap: 30px;
   row-gap: 70px;
   margin-top: 55px;

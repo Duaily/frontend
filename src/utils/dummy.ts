@@ -15,7 +15,6 @@ interface DummyReview {
   previewText: string;
   user: string;
 }
-
 export const dummy_review_data: DummyReview[] = [
   {
     id: 1,
