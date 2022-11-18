@@ -25,6 +25,7 @@ function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
     localStorage.removeItem("refreshToken");
     delete axios.defaults.headers.common["Authorization"];
     setIsLogin(false);
+    navigate("/");
   };
   const onMenuClick = (
     e: React.MouseEvent<HTMLDivElement>,

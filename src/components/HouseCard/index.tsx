@@ -54,7 +54,7 @@ const CardContainer = styled(motion.div)`
 const CardImage = styled.div<{ img_src: string }>`
   position: relative;
   width: 100%;
-  height: 370px;
+  height: 220px;
   background-image: url(${(props) => props.img_src});
   background-position: center;
   background-repeat: no-repeat;

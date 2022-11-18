@@ -10,6 +10,7 @@ import Navbar from "@components/Navbar";
 import styled from "styled-components";
 import Redirect from "@pages/Redirect";
 import HouseDetail from "@pages/HouseDetail";
+import HousePost from "@pages/HousePost";
 
 function Router() {
   const [menuState, setMenuState] = useState<MenuItemType>("duaily intro");
@@ -28,6 +29,7 @@ function Router() {
             element={<House setClickedMenu={setMenuState} />}
           />
           <Route path="/house/:id" element={<HouseDetail />} />
+          <Route path="/house/post" element={<HousePost />} />
           <Route
             path="/location"
             element={<Location setClickedMenu={setMenuState} />}

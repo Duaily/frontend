@@ -1,12 +1,14 @@
 import { MenuItemType } from "@types";
 import { opacityVariants } from "@utils/variants";
 import searchImg from "@assets/search.svg";
+import pencilImg from "@assets/jam_pencil.svg";
 import { dummy_house_data } from "@utils/dummy";
 import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import HouseCard from "@components/HouseCard";
 import Footer from "@components/Footer";
+import { useNavigate } from "react-router-dom";
 
 interface HouseProps {
   setClickedMenu: React.Dispatch<React.SetStateAction<MenuItemType>>;
@@ -15,6 +17,7 @@ interface HouseProps {
 const DUMMY_HOUSE_DATA = dummy_house_data;
 
 function House({ setClickedMenu }: HouseProps) {
+  const navigate = useNavigate();
   useEffect(() => {
     setClickedMenu("trade");
   }, [setClickedMenu]);
@@ -36,6 +39,7 @@ function House({ setClickedMenu }: HouseProps) {
             display: "flex",
             width: "100%",
             justifyContent: "space-between",
+            alignItems: "center",
             marginBottom: "80px",
           }}
         >
@@ -44,7 +48,14 @@ function House({ setClickedMenu }: HouseProps) {
             <SearchImg src={searchImg} alt="searchImg" />
           </InputContainer>
           <div>
-            <PostHouseButton>글쓰기</PostHouseButton>
+            <PostHouseButton onClick={() => navigate("/house/post")}>
+              <img
+                style={{ marginRight: "13px" }}
+                src={pencilImg}
+                alt="pencil"
+              />
+              글쓰기
+            </PostHouseButton>
           </div>
         </div>
         <TotalPostBox>총 포스트 수</TotalPostBox>
@@ -153,12 +164,8 @@ const PostHouseButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 155px;
-  height: 60px;
-  color: white;
-  border-radius: 50px;
-  background-color: ${(props) => props.theme.green_color};
-  font-size: 30px;
+  color: ${(props) => props.theme.green_color};
+  font-size: 24px;
   font-weight: 700;
   cursor: pointer;
   &:hover {

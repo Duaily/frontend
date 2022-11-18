@@ -4,7 +4,6 @@ axios.defaults.baseURL =
   process.env.NODE_ENV === "development"
     ? process.env.REACT_APP_DEV_BASE_URL
     : process.env.REACT_APP_PROD_BASE_URL;
-
 let refresh = false;
 
 axios.interceptors.response.use(
@@ -12,14 +11,14 @@ axios.interceptors.response.use(
   async (error: AxiosError) => {
     if (error.response?.status === 401 && !refresh) {
       refresh = true;
-      const response = await axios.post("auth/refresh", {
-        accessToken: localStorage.getItem("accessToken"),
-        refreshToken: localStorage.getItem("refreshToken"),
+      const { data } = await axios.post("/auth/reissue", {
+        accessToken: localStorage.getItem("accessToken")?.split(" ")[1],
+        refreshToken: localStorage.getItem("refreshToken")?.split(" ")[1],
       });
-      if (response.status === 200) {
+      if (data.status === 200) {
         axios.defaults.headers.common[
           "Authorization"
-        ] = `${response.data.grantType} ${response.data.accessToken}`;
+        ] = `${data.data.grantType} ${data.data.accessToken}`;
         return axios(error.config!);
       }
     }
