@@ -1,10 +1,10 @@
-import { MenuItemType } from "@types";
+import { CategoryType, MenuItemType } from "@types";
 import { opacityVariants } from "@utils/variants";
 import searchImg from "@assets/search.svg";
 import pencilImg from "@assets/jam_pencil.svg";
 import { dummy_house_data } from "@utils/dummy";
 import { motion } from "framer-motion";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import HouseCard from "@components/HouseCard";
 import Footer from "@components/Footer";
@@ -18,11 +18,26 @@ const DUMMY_HOUSE_DATA = dummy_house_data;
 
 function House({ setClickedMenu }: HouseProps) {
   const navigate = useNavigate();
+  const circleRef = useRef<HTMLDivElement>(null);
+  const allRef = useRef<HTMLDivElement>(null);
+  const [clickedCat, setClickedCat] = useState<CategoryType>("all");
+  const onCatClick = (
+    e: React.MouseEvent<HTMLDivElement>,
+    cat: CategoryType
+  ) => {
+    circleRef.current!.style.left =
+      e.currentTarget.offsetLeft + (e.currentTarget.offsetWidth - 30) + "px";
+    circleRef.current!.style.top = e.currentTarget.offsetTop + "10px ";
+    setClickedCat(cat);
+  };
   useEffect(() => {
     setClickedMenu("trade");
   }, [setClickedMenu]);
   useEffect(() => {
     window.scrollTo(0, 0);
+    circleRef.current!.style.left =
+      allRef.current!.offsetLeft + (allRef.current!.offsetWidth - 30) + "px";
+    circleRef.current!.style.top = allRef.current!.offsetTop + "10px ";
   }, []);
   return (
     <Container variants={opacityVariants} initial="initial" animate="mount">
@@ -30,13 +45,24 @@ function House({ setClickedMenu }: HouseProps) {
         <h1>빈 집 거래</h1>
         <p>다양한 집을 거래할 수 있는 공간입니다.</p>
       </JumbotronSection>
-      <div style={{ width: "100%", padding: "0 125px" }}>
+      <MenuContainer>
         <ButtonContainer>
-          <CategoryButton isClicked={true}>전체</CategoryButton>
-          <CategoryButton isClicked={false}>남해</CategoryButton>
-          <CategoryButton isClicked={false}>속초</CategoryButton>
-          <CategoryButton isClicked={false}>제주도</CategoryButton>
+          <Circle ref={circleRef} />
+          <CategoryButton ref={allRef} onClick={(e) => onCatClick(e, "all")}>
+            전체
+          </CategoryButton>
+          <CategoryButton onClick={(e) => onCatClick(e, "namhae")}>
+            남해
+          </CategoryButton>
+          <CategoryButton onClick={(e) => onCatClick(e, "sokcho")}>
+            속초
+          </CategoryButton>
+          <CategoryButton onClick={(e) => onCatClick(e, "jeju")}>
+            제주도
+          </CategoryButton>
         </ButtonContainer>
+      </MenuContainer>
+      <div style={{ width: "100%", padding: "0 125px" }}>
         <div
           style={{
             display: "flex",
@@ -46,22 +72,19 @@ function House({ setClickedMenu }: HouseProps) {
             marginBottom: "80px",
           }}
         >
+          <TotalPostBox>총 포스트 수</TotalPostBox>
           <InputContainer>
             <Input type="text" />
             <SearchImg src={searchImg} alt="searchImg" />
           </InputContainer>
-          <div>
-            <PostHouseButton onClick={() => navigate("/house/post")}>
-              <img
-                style={{ marginRight: "13px" }}
-                src={pencilImg}
-                alt="pencil"
-              />
-              글쓰기
-            </PostHouseButton>
-          </div>
         </div>
-        <TotalPostBox>총 포스트 수</TotalPostBox>
+        <div>
+          <PostButton onClick={() => navigate("/house/post")}>
+            <img style={{ marginRight: "13px" }} src={pencilImg} alt="pencil" />
+            글쓰기
+          </PostButton>
+        </div>
+
         <HouseCardContainer>
           {DUMMY_HOUSE_DATA.map((house) => (
             <HouseCard
@@ -114,27 +137,37 @@ const JumbotronSection = styled.div`
     margin-bottom: 60px;
   }
 `;
+const MenuContainer = styled.div`
+  width: 100%;
+  margin-bottom: 100px;
+  padding: 0 125px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+`;
 const ButtonContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 700px;
+  width: 100%;
   margin: 0 auto;
-  margin-bottom: 100px;
 `;
-const CategoryButton = styled.div<{ isClicked: boolean }>`
+const Circle = styled.div`
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.green_color};
+  transition: 0.5s;
+`;
+const CategoryButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 145px;
   height: 70px;
-  border: 5px solid ${(props) => props.theme.green_color};
-  border-radius: 50px;
-  color: ${(props) => (props.isClicked ? "white" : props.theme.green_color)};
-  background-color: ${(props) =>
-    props.isClicked ? props.theme.green_color : "white"};
-  font-size: 30px;
-  font-weight: 700;
+  font-size: 28px;
+  font-weight: 400;
   cursor: pointer;
   &:hover {
     opacity: 0.8;
@@ -144,7 +177,7 @@ const InputContainer = styled.div`
   display: flex;
   align-items: center;
   width: 700px;
-  height: 70px;
+  height: 50px;
 `;
 const Input = styled.input`
   width: 100%;
@@ -152,24 +185,27 @@ const Input = styled.input`
   padding: 0 15px;
   outline: none;
   border: none;
-  border-bottom: 4px solid black;
-  font-size: 30px;
+  border-bottom: 1px solid black;
+  font-size: 24px;
   font-weight: 700;
 `;
 const SearchImg = styled.img`
+  width: 27px;
+  height: 27px;
   align-self: flex-start;
-  transform: translateX(-48px);
+  transform: translate(-48px, 10px);
   cursor: pointer;
   &:hover {
     opacity: 0.8;
   }
 `;
-const PostHouseButton = styled.div`
+const PostButton = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  margin-right: 27px;
   align-items: center;
   color: ${(props) => props.theme.green_color};
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   cursor: pointer;
   &:hover {
@@ -177,9 +213,10 @@ const PostHouseButton = styled.div`
   }
 `;
 const TotalPostBox = styled.div`
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 60px;
-  margin-bottom: 40px;
   font-size: 32px;
   font-weight: 700;
 `;

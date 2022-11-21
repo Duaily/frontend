@@ -110,7 +110,7 @@ function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
               onMenuClick(e, "duallife intro");
             }}
           >
-            듀얼라이프 소개
+            듀얼 라이프 소개
           </p>
         </MenuItem>
         <MenuItem>
