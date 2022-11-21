@@ -23,8 +23,7 @@ axios.interceptors.response.use(
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${data.data.accessToken}`;
-
-        return axios(error.config!);
+        return axios(error.config);
       }
     }
     if (error.response?.status === 400 && !refresh) {

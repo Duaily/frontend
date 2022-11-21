@@ -12,6 +12,7 @@ import ReviewCard from "@components/ReviewCard";
 import Footer from "@components/Footer";
 import { useQuery } from "@tanstack/react-query";
 import { getUser } from "@apis/auth";
+import { FaSpinner } from "react-icons/fa";
 
 interface MainProps {
   setClickedMenu: React.Dispatch<React.SetStateAction<MenuItemType>>;
@@ -21,7 +22,7 @@ const DUMMY_HOUSE_DATA = dummy_house_data;
 const DUMMY_REVIEW_DATA = dummy_review_data;
 
 function Main({ setClickedMenu }: MainProps) {
-  const { data, isLoading } = useQuery(["user-info"], getUser);
+  const { data, isFetching } = useQuery(["user-info"], getUser);
   const navigate = useNavigate();
   useEffect(() => {
     setClickedMenu("duaily intro");
@@ -29,7 +30,14 @@ function Main({ setClickedMenu }: MainProps) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  if (isLoading && !data) return <div>Loading...</div>;
+  if (isFetching && !data)
+    return (
+      <LoadingContainer>
+        <FaSpinner size={36} className="spinner" />
+        <br></br>
+        <h1>잠시만 기다려주세요</h1>
+      </LoadingContainer>
+    );
   return (
     <Container variants={opacityVariants} initial="initial" animate="mount">
       <JumbotronSection />
@@ -104,6 +112,14 @@ function Main({ setClickedMenu }: MainProps) {
 
 export default Main;
 
+export const LoadingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+`;
 const Container = styled(motion.div)`
   width: 100%;
   max-width: 1440px;
