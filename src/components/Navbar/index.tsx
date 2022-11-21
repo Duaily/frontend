@@ -62,7 +62,7 @@ function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
     <Container>
       <LogoContainer>
         <div />
-        <LogoImage />
+        <LogoImage onClick={() => navigate("/")} />
         <div>
           {isLogin ? (
             <NavbarButtons>

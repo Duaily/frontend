@@ -1,10 +1,13 @@
 import Footer from "@components/Footer";
 import { opacityVariants } from "@utils/variants";
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 function Process() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Container variants={opacityVariants} initial="initial" animate="mount">
       <JumbotronSection>

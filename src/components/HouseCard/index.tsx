@@ -1,11 +1,12 @@
-import React from "react";
 import styled from "styled-components";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import processCount from "@utils/processCount";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 interface HouseCardProps {
+  houseId: number;
   houseImage: string;
   title: string;
   location: string;
@@ -16,8 +17,12 @@ interface HouseCardProps {
 }
 
 function HouseCard(props: HouseCardProps) {
+  const navigate = useNavigate();
   return (
-    <CardContainer whileHover={{ scale: 1.01, opacity: 0.8 }}>
+    <CardContainer
+      onClick={() => navigate(`/house/${props.houseId}`)}
+      whileHover={{ scale: 1.01, opacity: 0.8 }}
+    >
       <CardImage img_src={props.houseImage}>
         <CardStatus>입주 가능</CardStatus>
       </CardImage>
