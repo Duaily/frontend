@@ -1,3 +1,4 @@
+import { reissue } from "./auth";
 import axios, { AxiosError } from "axios";
 
 axios.defaults.baseURL =
@@ -12,15 +13,17 @@ axios.interceptors.response.use(
   async (error: AxiosError) => {
     if (error.response?.status === 401 && !refresh) {
       refresh = true;
-      const response = await axios.post("auth/refresh", {
-        accessToken: localStorage.getItem("accessToken"),
-        refreshToken: localStorage.getItem("refreshToken"),
-      });
-      if (response.status === 200) {
+      const data = await reissue();
+      if (data.status === 200) {
+        localStorage.setItem("accessToken", `Bearer ${data.data.accessToken}`);
+        localStorage.setItem(
+          "refreshToken",
+          `Bearer ${data.data.refreshToken}`
+        );
         axios.defaults.headers.common[
           "Authorization"
-        ] = `${response.data.grantType} ${response.data.accessToken}`;
-        return axios(error.config!);
+        ] = `Bearer ${data.data.accessToken}`;
+        return axios(error.config);
       }
     }
     if (error.response?.status === 400 && !refresh) {

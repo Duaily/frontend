@@ -68,18 +68,27 @@ const GlobalStyle = createGlobalStyle`
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-const client = new QueryClient();
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+      retry: 0,
+    },
+  },
+});
 
 root.render(
-  <React.StrictMode>
-    <RecoilRoot>
-      <QueryClientProvider client={client}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <App />
-          <ReactQueryDevtools />
-        </ThemeProvider>
-      </QueryClientProvider>
-    </RecoilRoot>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <RecoilRoot>
+    <QueryClientProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <App />
+        <ReactQueryDevtools />
+      </ThemeProvider>
+    </QueryClientProvider>
+  </RecoilRoot>
+  // </React.StrictMode>
 );

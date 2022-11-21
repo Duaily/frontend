@@ -1,5 +1,7 @@
 export type MenuItemType =
   | "duaily intro"
   | "trade"
-  | "location intro"
+  | "duallife intro"
   | "community";
+
+export type CategoryType = "all" | "namhae" | "sokcho" | "jeju";
