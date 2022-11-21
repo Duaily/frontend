@@ -21,6 +21,9 @@ function House({ setClickedMenu }: HouseProps) {
   useEffect(() => {
     setClickedMenu("trade");
   }, [setClickedMenu]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Container variants={opacityVariants} initial="initial" animate="mount">
       <JumbotronSection>
@@ -63,6 +66,7 @@ function House({ setClickedMenu }: HouseProps) {
           {DUMMY_HOUSE_DATA.map((house) => (
             <HouseCard
               key={house.id}
+              houseId={house.id}
               houseImage={house.imageUrl}
               title={house.title}
               location={house.location}

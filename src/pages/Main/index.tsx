@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import HouseCard from "@components/HouseCard";
 import ReviewCard from "@components/ReviewCard";
 import Footer from "@components/Footer";
+import { useQuery } from "@tanstack/react-query";
+import { getUser } from "@apis/auth";
 
 interface MainProps {
   setClickedMenu: React.Dispatch<React.SetStateAction<MenuItemType>>;
@@ -19,10 +21,15 @@ const DUMMY_HOUSE_DATA = dummy_house_data;
 const DUMMY_REVIEW_DATA = dummy_review_data;
 
 function Main({ setClickedMenu }: MainProps) {
+  const { data, isLoading } = useQuery(["user-info"], getUser);
   const navigate = useNavigate();
   useEffect(() => {
     setClickedMenu("duaily intro");
   }, [setClickedMenu]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  if (isLoading && !data) return <div>Loading...</div>;
   return (
     <Container variants={opacityVariants} initial="initial" animate="mount">
       <JumbotronSection />
@@ -52,6 +59,7 @@ function Main({ setClickedMenu }: MainProps) {
           {DUMMY_HOUSE_DATA.map((house) => (
             <HouseCard
               key={house.id}
+              houseId={house.id}
               houseImage={house.imageUrl}
               title={house.title}
               location={house.location}

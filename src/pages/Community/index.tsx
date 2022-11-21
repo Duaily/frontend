@@ -5,6 +5,7 @@ import styled from "styled-components";
 import searchImg from "@assets/search.svg";
 import { dummy_review_data } from "@utils/dummy";
 import ReviewCard from "@components/ReviewCard";
+import { opacityVariants } from "@utils/variants";
 
 interface CommunityProps {
   setClickedMenu: React.Dispatch<React.SetStateAction<MenuItemType>>;
@@ -16,8 +17,11 @@ function Commnunity({ setClickedMenu }: CommunityProps) {
   useEffect(() => {
     setClickedMenu("community");
   }, [setClickedMenu]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
-    <Container>
+    <Container variants={opacityVariants} initial="initial" animate="mount">
       <JumbotronSection>
         <h1>듀얼라이프 생생 후기</h1>
         <p style={{ textAlign: "center" }}>

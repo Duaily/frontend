@@ -1,9 +1,14 @@
+import { getUser } from "@apis/auth";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 
+type Category = "MINE" | "MONTHLY";
 function HousePost() {
+  const { data, isLoading } = useQuery(["user-info"], getUser);
   const [title, setTitle] = useState("");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [category, setCategory] = useState<Category>("MINE");
   const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
   const [zipcode, setZipcode] = useState("");
@@ -12,7 +17,6 @@ function HousePost() {
   const [createdDate, setCreatedDate] = useState("");
   const [purpose, setPurpose] = useState("");
   const [regionId, setRegionId] = useState(0);
-
   const onFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const file = e.target.files[0];
@@ -22,7 +26,7 @@ function HousePost() {
     setImageUrls((prev) => [...prev, data.data]);
   };
   const onPostHouse = async () => {
-    const { data } = await axios.post("house", {
+    await axios.post("house", {
       title,
       imageUrls,
       city,
@@ -33,9 +37,13 @@ function HousePost() {
       createdDate,
       purpose,
       regionId,
+      category,
     });
-    console.log(data.data);
   };
+  const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCategory(e.target.value as Category);
+  };
+  if (isLoading && !data) return <div>Loading...</div>;
   return (
     <div>
       <div>
@@ -119,6 +127,13 @@ function HousePost() {
             setCreatedDate(e.target.value);
           }}
         />
+      </div>
+      <div>
+        <h1>카테고리</h1>
+        <select onChange={onSelectChange}>
+          <option value="MINE">매매</option>
+          <option value="MONTHLY">월세</option>
+        </select>
       </div>
       <div>
         <h1>빈 집 용도</h1>

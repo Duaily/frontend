@@ -13,19 +13,11 @@ function Redirect() {
   useEffect(() => {
     kakaoLogin(code || "")
       .then((res) => {
-        console.log(res);
         axios.defaults.headers.common[
           "Authorization"
-        ] = `${res.grantType} ${res.accessToken}`;
-        localStorage.setItem(
-          "accessToken",
-          `${res.grantType} ${res.accessToken}`
-        );
-        localStorage.setItem(
-          "refreshToken",
-          `${res.grantType} ${res.refreshToken}`
-        );
-        console.log(res.init);
+        ] = `Bearer ${res.accessToken}`;
+        localStorage.setItem("accessToken", `Bearer ${res.accessToken}`);
+        localStorage.setItem("refreshToken", `Bearer ${res.refreshToken}`);
         setIsLogin(true);
         navigate("/");
       })
