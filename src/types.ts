@@ -3,3 +3,5 @@ export type MenuItemType =
   | "trade"
   | "duallife intro"
   | "community";
+
+export type CategoryType = "all" | "namhae" | "sokcho" | "jeju";

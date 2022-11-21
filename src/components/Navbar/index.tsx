@@ -6,6 +6,7 @@ import { MenuItemType } from "@types";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { isLoginAtom } from "@atoms/atom";
+import { KAKAO_AUTH_LOGOUT_URL } from "@utils/OAuth";
 
 interface NavbarProps {
   clickedMenu: MenuItemType;
@@ -25,7 +26,7 @@ function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
     localStorage.removeItem("refreshToken");
     delete axios.defaults.headers.common["Authorization"];
     setIsLogin(false);
-    navigate("/");
+    window.location.href = KAKAO_AUTH_LOGOUT_URL;
   };
   const onMenuClick = (
     e: React.MouseEvent<HTMLDivElement>,
@@ -109,7 +110,7 @@ function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
               onMenuClick(e, "duallife intro");
             }}
           >
-            듀얼라이프 소개
+            듀얼 라이프 소개
           </p>
         </MenuItem>
         <MenuItem>

@@ -2,10 +2,13 @@ import { getUser } from "@apis/auth";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
+import { FaSpinner } from "react-icons/fa";
+import { Navigate } from "react-router-dom";
+import styled from "styled-components";
 
 type Category = "MINE" | "MONTHLY";
 function HousePost() {
-  const { data, isLoading } = useQuery(["user-info"], getUser);
+  const { data, isFetching } = useQuery(["user-info-1"], getUser);
   const [title, setTitle] = useState("");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [category, setCategory] = useState<Category>("MINE");
@@ -43,7 +46,15 @@ function HousePost() {
   const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value as Category);
   };
-  if (isLoading && !data) return <div>Loading...</div>;
+  if (isFetching && !data)
+    return (
+      <LoadingContainer>
+        <FaSpinner size={36} className="spinner" />
+        <br></br>
+        <h1>잠시만 기다려주세요</h1>
+      </LoadingContainer>
+    );
+  if (!isFetching && !data) return <Navigate to={"/login"} />;
   return (
     <div>
       <div>
@@ -161,3 +172,12 @@ function HousePost() {
 }
 
 export default HousePost;
+
+const LoadingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+`;

@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import searchImg from "@assets/search.svg";
+import pencilImg from "@assets/jam_pencil.svg";
 import { dummy_review_data } from "@utils/dummy";
 import ReviewCard from "@components/ReviewCard";
 import { opacityVariants } from "@utils/variants";
+import Footer from "@components/Footer";
 
 interface CommunityProps {
   setClickedMenu: React.Dispatch<React.SetStateAction<MenuItemType>>;
@@ -29,34 +31,42 @@ function Commnunity({ setClickedMenu }: CommunityProps) {
           후기를 들을 수 있는 공간입니다.
         </p>
       </JumbotronSection>
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          justifyContent: "space-between",
-          marginBottom: "80px",
-        }}
-      >
-        <InputContainer>
-          <Input type="text" />
-          <SearchImg src={searchImg} alt="searchImg" />
-        </InputContainer>
-        <div>
-          <PostHouseButton>글쓰기</PostHouseButton>
+      <div style={{ width: "100%", padding: "0 125px" }}>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "80px",
+          }}
+        >
+          <TotalPostBox>총 포스트 수</TotalPostBox>
+          <InputContainer>
+            <Input type="text" />
+            <SearchImg src={searchImg} alt="searchImg" />
+          </InputContainer>
         </div>
+        <div>
+          <PostButton>
+            <img style={{ marginRight: "13px" }} src={pencilImg} alt="pencil" />
+            글쓰기
+          </PostButton>
+        </div>
+        <ReviewCardContainer>
+          {DUMMY_REVIEW_DATA.map((review) => (
+            <ReviewCard
+              key={review.id}
+              title={review.title}
+              imageUrl={review.imageUrl}
+              previewText={review.previewText}
+              user={review.user}
+            />
+          ))}
+        </ReviewCardContainer>
       </div>
-      <TotalPostBox>총 포스트 수</TotalPostBox>
-      <ReviewCardContainer>
-        {DUMMY_REVIEW_DATA.map((review) => (
-          <ReviewCard
-            key={review.id}
-            title={review.title}
-            imageUrl={review.imageUrl}
-            previewText={review.previewText}
-            user={review.user}
-          />
-        ))}
-      </ReviewCardContainer>
+      <div style={{ marginBottom: "110px" }} />
+      <Footer />
     </Container>
   );
 }
@@ -95,7 +105,7 @@ const InputContainer = styled.div`
   display: flex;
   align-items: center;
   width: 700px;
-  height: 70px;
+  height: 50px;
 `;
 const Input = styled.input`
   width: 100%;
@@ -103,28 +113,27 @@ const Input = styled.input`
   padding: 0 15px;
   outline: none;
   border: none;
-  border-bottom: 4px solid black;
-  font-size: 30px;
+  border-bottom: 1px solid black;
+  font-size: 24px;
   font-weight: 700;
 `;
 const SearchImg = styled.img`
+  width: 27px;
+  height: 27px;
   align-self: flex-start;
-  transform: translateX(-48px);
+  transform: translate(-48px, 10px);
   cursor: pointer;
   &:hover {
     opacity: 0.8;
   }
 `;
-const PostHouseButton = styled.div`
+const PostButton = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  margin-right: 27px;
   align-items: center;
-  width: 155px;
-  height: 60px;
-  color: white;
-  border-radius: 50px;
-  background-color: ${(props) => props.theme.green_color};
-  font-size: 30px;
+  color: ${(props) => props.theme.green_color};
+  font-size: 26px;
   font-weight: 700;
   cursor: pointer;
   &:hover {
@@ -132,9 +141,10 @@ const PostHouseButton = styled.div`
   }
 `;
 const TotalPostBox = styled.div`
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 60px;
-  margin-bottom: 40px;
   font-size: 32px;
   font-weight: 700;
 `;
