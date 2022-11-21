@@ -18,7 +18,7 @@ function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
   const underlinRef = useRef<HTMLDivElement>(null);
   const duailyInfoRef = useRef<HTMLDivElement>(null);
   const tradeRef = useRef<HTMLDivElement>(null);
-  const locationInfoRef = useRef<HTMLDivElement>(null);
+  const daullifeIntroRef = useRef<HTMLDivElement>(null);
   const communityRef = useRef<HTMLDivElement>(null);
   const onLogout = () => {
     localStorage.removeItem("accessToken");
@@ -51,8 +51,8 @@ function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
       case "trade":
         setUnderlinePosition(tradeRef);
         break;
-      case "location intro":
-        setUnderlinePosition(locationInfoRef);
+      case "duallife intro":
+        setUnderlinePosition(daullifeIntroRef);
         break;
       case "community":
         setUnderlinePosition(communityRef);
@@ -103,13 +103,13 @@ function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
         </MenuItem>
         <MenuItem>
           <p
-            ref={locationInfoRef}
+            ref={daullifeIntroRef}
             onClick={(e) => {
               navigate("/location");
-              onMenuClick(e, "location intro");
+              onMenuClick(e, "duallife intro");
             }}
           >
-            지역 소개
+            듀얼라이프 소개
           </p>
         </MenuItem>
         <MenuItem>

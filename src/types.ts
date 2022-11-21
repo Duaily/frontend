@@ -1,5 +1,5 @@
 export type MenuItemType =
   | "duaily intro"
   | "trade"
-  | "location intro"
+  | "duallife intro"
   | "community";
