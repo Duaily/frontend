@@ -40,11 +40,20 @@ function Redirect() {
   };
   const onSendAuthCode = async () => {
     try {
-      const { data } = await axios.post("/auth/check-sms", {
-        code: authCode,
-        contact: phoneNum,
-      });
+      const { data } = await axios.post(
+        "/auth/check-sms",
+        {
+          code: authCode,
+          contact: phoneNum,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       if (data.status === 200) {
+        setIsNew(false);
         setIsLogin(true);
         axios.defaults.headers.common[
           "Authorization"
@@ -62,7 +71,7 @@ function Redirect() {
       .then((res) => {
         setAccessToken(res.accessToken);
         setRefreshToken(res.refreshToken);
-        if (!res.init) {
+        if (res.init) {
           setIsNew(true);
         } else {
           setIsLogin(true);
