@@ -106,7 +106,7 @@ function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
           <p
             ref={daullifeIntroRef}
             onClick={(e) => {
-              navigate("/location");
+              navigate("/duallife");
               onMenuClick(e, "duallife intro");
             }}
           >

@@ -18,8 +18,8 @@ interface MainProps {
   setClickedMenu: React.Dispatch<React.SetStateAction<MenuItemType>>;
 }
 
-const DUMMY_HOUSE_DATA = dummy_house_data;
-const DUMMY_REVIEW_DATA = dummy_review_data;
+const DUMMY_HOUSE_DATA = dummy_house_data.slice(0, 6);
+const DUMMY_REVIEW_DATA = dummy_review_data.slice(0, 3);
 
 function Main({ setClickedMenu }: MainProps) {
   const { data, isFetching } = useQuery(["user-info"], getUser);
