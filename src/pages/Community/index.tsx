@@ -152,7 +152,7 @@ const TotalPostBox = styled.div`
 const ReviewCardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  column-gap: 30px;
+  column-gap: 70px;
   row-gap: 70px;
   margin-top: 55px;
 `;
