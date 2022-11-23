@@ -18,8 +18,8 @@ const DUMMY_REVIEW_DATA = dummy_review_data;
 
 function Commnunity({ setClickedMenu }: CommunityProps) {
   const circleRef = useRef<HTMLDivElement>(null);
-  const freeRef = useRef<HTMLDivElement>(null);
-  const [clickedCat, setClickedCat] = useState<CommnunityCatType>("free");
+  const reviewRef = useRef<HTMLDivElement>(null);
+  const [clickedCat, setClickedCat] = useState<CommnunityCatType>("review");
   const onCatClick = (
     e: React.MouseEvent<HTMLDivElement>,
     cat: CommnunityCatType
@@ -38,8 +38,10 @@ function Commnunity({ setClickedMenu }: CommunityProps) {
   useEffect(() => {
     window.scrollTo(0, 0);
     circleRef.current!.style.left =
-      freeRef.current!.offsetLeft + (freeRef.current!.offsetWidth - 10) + "px";
-    circleRef.current!.style.top = freeRef.current!.offsetTop + "10px ";
+      reviewRef.current!.offsetLeft +
+      (reviewRef.current!.offsetWidth - 10) +
+      "px";
+    circleRef.current!.style.top = reviewRef.current!.offsetTop + "10px ";
   }, []);
   return (
     <Container variants={opacityVariants} initial="initial" animate="mount">
@@ -64,13 +66,16 @@ function Commnunity({ setClickedMenu }: CommunityProps) {
       <MenuContainer>
         <ButtonContainer>
           <Circle ref={circleRef} />
-          <CategoryButton ref={freeRef} onClick={(e) => onCatClick(e, "free")}>
+          <CategoryButton onClick={(e) => onCatClick(e, "free")}>
             자유게시판
           </CategoryButton>
           <CategoryButton onClick={(e) => onCatClick(e, "marketing")}>
             홍보게시판
           </CategoryButton>
-          <CategoryButton onClick={(e) => onCatClick(e, "review")}>
+          <CategoryButton
+            ref={reviewRef}
+            onClick={(e) => onCatClick(e, "review")}
+          >
             후기게시판
           </CategoryButton>
         </ButtonContainer>
@@ -210,6 +215,7 @@ const TotalPostBox = styled.div`
 const ReviewCardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+
   column-gap: 70px;
   row-gap: 70px;
   margin-top: 55px;
