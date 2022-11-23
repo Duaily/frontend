@@ -1,6 +1,6 @@
-import { MenuItemType } from "@types";
+import { CommnunityCatType, MenuItemType } from "@types";
 import { motion } from "framer-motion";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import searchImg from "@assets/search.svg";
 import pencilImg from "@assets/jam_pencil.svg";
@@ -8,6 +8,7 @@ import { dummy_review_data } from "@utils/dummy";
 import ReviewCard from "@components/ReviewCard";
 import { opacityVariants } from "@utils/variants";
 import Footer from "@components/Footer";
+import Banner from "@components/Banner";
 
 interface CommunityProps {
   setClickedMenu: React.Dispatch<React.SetStateAction<MenuItemType>>;
@@ -16,21 +17,69 @@ interface CommunityProps {
 const DUMMY_REVIEW_DATA = dummy_review_data;
 
 function Commnunity({ setClickedMenu }: CommunityProps) {
+  const circleRef = useRef<HTMLDivElement>(null);
+  const reviewRef = useRef<HTMLDivElement>(null);
+  const [clickedCat, setClickedCat] = useState<CommnunityCatType>("review");
+  const onCatClick = (
+    e: React.MouseEvent<HTMLDivElement>,
+    cat: CommnunityCatType
+  ) => {
+    circleRef.current!.style.left =
+      e.currentTarget.offsetLeft + (e.currentTarget.offsetWidth - 10) + "px";
+    circleRef.current!.style.top = e.currentTarget.offsetTop + "10px ";
+    setClickedCat(cat);
+  };
   useEffect(() => {
     setClickedMenu("community");
   }, [setClickedMenu]);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    circleRef.current!.style.left =
+      reviewRef.current!.offsetLeft +
+      (reviewRef.current!.offsetWidth - 10) +
+      "px";
+    circleRef.current!.style.top = reviewRef.current!.offsetTop + "10px ";
+  }, []);
   return (
     <Container variants={opacityVariants} initial="initial" animate="mount">
-      <JumbotronSection>
-        <h1>듀얼라이프 생생 후기</h1>
-        <p style={{ textAlign: "center" }}>
-          듀얼리 속에서 발견할 수 있는 듀얼라이프의 생생한 <br />
-          후기를 들을 수 있는 공간입니다.
-        </p>
-      </JumbotronSection>
+      {clickedCat === "free" ? (
+        <Banner
+          title="자유게시판"
+          substring1="다양한 고민들을 해결할 수 있는 공간입니다. "
+        />
+      ) : clickedCat === "review" ? (
+        <Banner
+          title="듀얼라이프 생생 후기"
+          substring1="듀얼리 속에서 발견할 수 있는 듀얼라이프의 생생한"
+          substring2="후기를 들을 수 있는 공간입니다."
+        />
+      ) : (
+        <Banner
+          title="홍보게시판"
+          substring1="나만의 듀얼 라이프와 다양한 듀얼 라이프를"
+          substring2="탐색할 수 있는 공간입니다."
+        />
+      )}
+      <MenuContainer>
+        <ButtonContainer>
+          <Circle ref={circleRef} />
+          <CategoryButton onClick={(e) => onCatClick(e, "free")}>
+            자유게시판
+          </CategoryButton>
+          <CategoryButton onClick={(e) => onCatClick(e, "marketing")}>
+            홍보게시판
+          </CategoryButton>
+          <CategoryButton
+            ref={reviewRef}
+            onClick={(e) => onCatClick(e, "review")}
+          >
+            후기게시판
+          </CategoryButton>
+        </ButtonContainer>
+      </MenuContainer>
       <div style={{ width: "100%", padding: "0 125px" }}>
         <div
           style={{
@@ -79,26 +128,40 @@ const Container = styled(motion.div)`
   min-height: 100%;
   margin: 0 auto;
 `;
-const JumbotronSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-bottom: 90px;
+const MenuContainer = styled.div`
   width: 100%;
-  height: 350px;
-  background-color: #f3f3f3;
-  & > h1 {
-    font-size: 40px;
-    font-weight: 900;
-    color: ${(props) => props.theme.green_color};
-    text-decoration: underline;
-    text-underline-position: under;
-  }
-  & > p {
-    font-size: 28px;
-    font-weight: 350;
-    margin-bottom: 60px;
+  margin-bottom: 100px;
+  padding: 0 125px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+`;
+const ButtonContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+`;
+const Circle = styled.div`
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.green_color};
+  transition: 0.5s;
+`;
+const CategoryButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 145px;
+  height: 70px;
+  font-size: 28px;
+  font-weight: 400;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
   }
 `;
 const InputContainer = styled.div`
@@ -152,6 +215,7 @@ const TotalPostBox = styled.div`
 const ReviewCardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+
   column-gap: 70px;
   row-gap: 70px;
   margin-top: 55px;
