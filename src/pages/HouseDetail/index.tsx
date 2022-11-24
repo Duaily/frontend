@@ -74,11 +74,11 @@ function HouseDetail() {
             </S.BaseInfo>
           </S.EtcInfo>
         </S.HouseInfo>
-        <S.MapInfo>
-          <h1>지도</h1>
-          <S.MapImg />
-        </S.MapInfo>
         <S.ContentData>
+          <S.MapInfo>
+            <h1>지도</h1>
+            <S.MapImg />
+          </S.MapInfo>
           <S.Head1>바다 앞에 위치한 포근한 집, 듀얼리 하우스 2호점</S.Head1>
           <S.Text>
             {`관광객들로 북적이는 군내길에서 벗어나 청해진남로를 따라 걷다 보면 듀얼리하우스 2호점이 있습니다.
