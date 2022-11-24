@@ -130,9 +130,9 @@ export const MapInfo = styled.div`
   width: 1044px;
   margin: 50px auto;
   @media screen and (max-width: 500px) {
-    max-width: 300px;
     padding: 0;
     align-items: center;
+    width: 100%;
   }
   & > h1 {
     margin-bottom: 30px;
@@ -146,7 +146,7 @@ export const MapInfo = styled.div`
   }
 `;
 export const MapImg = styled.img.attrs({ src: mapImg })`
-  width: 300px;
+  width: 100%;
 `;
 export const ContentData = styled.div`
   width: 100%;
