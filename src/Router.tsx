@@ -12,6 +12,7 @@ import HouseDetail from "@pages/HouseDetail";
 import HousePost from "@pages/HousePost";
 import Process from "@pages/Process";
 import DualLifIntro from "@pages/DualLifeIntro";
+import ReviewDetail from "@pages/ReviewDetail";
 
 function Router() {
   const [menuState, setMenuState] = useState<MenuItemType>("duaily intro");
@@ -39,6 +40,8 @@ function Router() {
             path="/community"
             element={<Commnunity setClickedMenu={setMenuState} />}
           />
+          <Route path="/review/:id" element={<ReviewDetail />} />
+
           <Route path="/auth/kakao" element={<Redirect />} />
           <Route path="/login" element={<Login />} />
           <Route path="/process" element={<Process />} />

@@ -66,17 +66,17 @@ function Commnunity({ setClickedMenu }: CommunityProps) {
       <MenuContainer>
         <ButtonContainer>
           <Circle ref={circleRef} />
-          <CategoryButton onClick={(e) => onCatClick(e, "free")}>
-            자유게시판
-          </CategoryButton>
-          <CategoryButton onClick={(e) => onCatClick(e, "marketing")}>
-            홍보게시판
-          </CategoryButton>
           <CategoryButton
             ref={reviewRef}
             onClick={(e) => onCatClick(e, "review")}
           >
             후기게시판
+          </CategoryButton>
+          <CategoryButton onClick={(e) => onCatClick(e, "free")}>
+            자유게시판
+          </CategoryButton>
+          <CategoryButton onClick={(e) => onCatClick(e, "marketing")}>
+            홍보게시판
           </CategoryButton>
         </ButtonContainer>
       </MenuContainer>
@@ -106,6 +106,7 @@ function Commnunity({ setClickedMenu }: CommunityProps) {
           {DUMMY_REVIEW_DATA.map((review) => (
             <ReviewCard
               key={review.id}
+              id={review.id}
               title={review.title}
               imageUrl={review.imageUrl}
               previewText={review.previewText}

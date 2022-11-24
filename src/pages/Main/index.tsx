@@ -13,6 +13,8 @@ import Footer from "@components/Footer";
 import { useQuery } from "@tanstack/react-query";
 import { getUser } from "@apis/auth";
 import { FaSpinner } from "react-icons/fa";
+import { useSetRecoilState } from "recoil";
+import { isLoginAtom } from "@atoms/atom";
 
 interface MainProps {
   setClickedMenu: React.Dispatch<React.SetStateAction<MenuItemType>>;
@@ -23,10 +25,14 @@ const DUMMY_REVIEW_DATA = dummy_review_data.slice(0, 3);
 
 function Main({ setClickedMenu }: MainProps) {
   const { data, isFetching } = useQuery(["user-info"], getUser);
+  const setIsLogin = useSetRecoilState(isLoginAtom);
   const navigate = useNavigate();
   useEffect(() => {
     setClickedMenu("duaily intro");
-  }, [setClickedMenu]);
+    if (data) {
+      setIsLogin(true);
+    }
+  }, [data, setClickedMenu, setIsLogin]);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -90,6 +96,7 @@ function Main({ setClickedMenu }: MainProps) {
           {DUMMY_REVIEW_DATA.map((review) => (
             <ReviewCard
               key={review.id}
+              id={review.id}
               imageUrl={review.imageUrl}
               title={review.title}
               previewText={review.previewText}

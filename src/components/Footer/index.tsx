@@ -11,7 +11,7 @@ function Footer() {
         <Links>
           <Link to="/">듀얼리 소개</Link>
           <Link to="/house">빈 집 거래</Link>
-          <Link to="/location">지역 소개</Link>
+          <Link to="/duallife">듀얼 라이프 소개</Link>
           <Link to="/community">커뮤니티</Link>
           <Link to="/">마이페이지</Link>
         </Links>
