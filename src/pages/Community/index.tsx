@@ -1,7 +1,6 @@
+import * as S from "./styles";
 import { CommnunityCatType, MenuItemType } from "@types";
-import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 import searchImg from "@assets/search.svg";
 import pencilImg from "@assets/jam_pencil.svg";
 import { dummy_review_data } from "@utils/dummy";
@@ -44,7 +43,7 @@ function Commnunity({ setClickedMenu }: CommunityProps) {
     circleRef.current!.style.top = reviewRef.current!.offsetTop + "10px ";
   }, []);
   return (
-    <Container variants={opacityVariants} initial="initial" animate="mount">
+    <S.Container variants={opacityVariants} initial="initial" animate="mount">
       {clickedCat === "free" ? (
         <Banner
           title="자유게시판"
@@ -63,24 +62,24 @@ function Commnunity({ setClickedMenu }: CommunityProps) {
           substring2="탐색할 수 있는 공간입니다."
         />
       )}
-      <MenuContainer>
-        <ButtonContainer>
-          <Circle ref={circleRef} />
-          <CategoryButton
+      <S.MenuContainer>
+        <S.ButtonContainer>
+          <S.Circle ref={circleRef} />
+          <S.CategoryButton
             ref={reviewRef}
             onClick={(e) => onCatClick(e, "review")}
           >
             후기게시판
-          </CategoryButton>
-          <CategoryButton onClick={(e) => onCatClick(e, "free")}>
+          </S.CategoryButton>
+          <S.CategoryButton onClick={(e) => onCatClick(e, "free")}>
             자유게시판
-          </CategoryButton>
-          <CategoryButton onClick={(e) => onCatClick(e, "marketing")}>
+          </S.CategoryButton>
+          <S.CategoryButton onClick={(e) => onCatClick(e, "marketing")}>
             홍보게시판
-          </CategoryButton>
-        </ButtonContainer>
-      </MenuContainer>
-      <div style={{ width: "100%", padding: "0 125px" }}>
+          </S.CategoryButton>
+        </S.ButtonContainer>
+      </S.MenuContainer>
+      <S.ContentConatiner>
         <div
           style={{
             display: "flex",
@@ -90,19 +89,19 @@ function Commnunity({ setClickedMenu }: CommunityProps) {
             marginBottom: "80px",
           }}
         >
-          <TotalPostBox>총 포스트 수</TotalPostBox>
-          <InputContainer>
-            <Input type="text" />
-            <SearchImg src={searchImg} alt="searchImg" />
-          </InputContainer>
+          <S.TotalPostBox>총 포스트 수</S.TotalPostBox>
+          <S.InputContainer>
+            <S.Input type="text" />
+            <S.SearchImg src={searchImg} alt="searchImg" />
+          </S.InputContainer>
         </div>
         <div>
-          <PostButton>
+          <S.PostButton>
             <img style={{ marginRight: "13px" }} src={pencilImg} alt="pencil" />
             글쓰기
-          </PostButton>
+          </S.PostButton>
         </div>
-        <ReviewCardContainer>
+        <S.ReviewCardContainer>
           {DUMMY_REVIEW_DATA.map((review) => (
             <ReviewCard
               key={review.id}
@@ -113,111 +112,12 @@ function Commnunity({ setClickedMenu }: CommunityProps) {
               user={review.user}
             />
           ))}
-        </ReviewCardContainer>
-      </div>
+        </S.ReviewCardContainer>
+      </S.ContentConatiner>
       <div style={{ marginBottom: "110px" }} />
       <Footer />
-    </Container>
+    </S.Container>
   );
 }
 
 export default Commnunity;
-
-const Container = styled(motion.div)`
-  width: 100%;
-  max-width: 1440px;
-  min-height: 100%;
-  margin: 0 auto;
-`;
-const MenuContainer = styled.div`
-  width: 100%;
-  margin-bottom: 100px;
-  padding: 0 125px;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-`;
-const ButtonContainer = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin: 0 auto;
-`;
-const Circle = styled.div`
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: ${(props) => props.theme.green_color};
-  transition: 0.5s;
-`;
-const CategoryButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 145px;
-  height: 70px;
-  font-size: 28px;
-  font-weight: 400;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  width: 700px;
-  height: 50px;
-`;
-const Input = styled.input`
-  width: 100%;
-  height: 100%;
-  padding: 0 15px;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid black;
-  font-size: 24px;
-  font-weight: 700;
-`;
-const SearchImg = styled.img`
-  width: 27px;
-  height: 27px;
-  align-self: flex-start;
-  transform: translate(-48px, 10px);
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-const PostButton = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 27px;
-  align-items: center;
-  color: ${(props) => props.theme.green_color};
-  font-size: 26px;
-  font-weight: 700;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-const TotalPostBox = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 60px;
-  font-size: 32px;
-  font-weight: 700;
-`;
-
-const ReviewCardContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-
-  column-gap: 70px;
-  row-gap: 70px;
-  margin-top: 55px;
-`;

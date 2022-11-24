@@ -66,9 +66,17 @@ function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
         <div>
           {isLogin ? (
             <S.NavbarButtons>
-              <button>마이페이지</button>
+              <button>
+                마이
+                <br />
+                페이지
+              </button>
               <p>|</p>
-              <button onClick={onLogout}>로그아웃</button>
+              <button onClick={onLogout}>
+                로그
+                <br />
+                아웃
+              </button>
             </S.NavbarButtons>
           ) : (
             <S.NavbarButtons>
