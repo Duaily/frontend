@@ -5,15 +5,21 @@ export const kakaoLogin = async (code: string) => {
   return response.data.data;
 };
 export const reissue = async () => {
-  const { data } = await axios.post<ReissueResponse>("/auth/reissue", {
-    accessToken: localStorage.getItem("accessToken")?.split(" ")[1],
-    refreshToken: localStorage.getItem("refreshToken")?.split(" ")[1],
-  });
-  return data;
+  try {
+    const { data } = await axios.post<ReissueResponse>("/auth/reissue", {
+      accessToken: localStorage.getItem("accessToken")?.split(" ")[1],
+      refreshToken: localStorage.getItem("refreshToken")?.split(" ")[1],
+    });
+    return data;
+  } catch (e) {}
 };
 export const getUser = async () => {
-  const { data } = await axios.get<UserResponse>("/user");
-  return data.data;
+  try {
+    const { data } = await axios.get<UserResponse>("/user");
+    return data.data;
+  } catch (e) {
+    return null;
+  }
 };
 
 interface LoginResponseData {

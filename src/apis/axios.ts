@@ -14,7 +14,7 @@ axios.interceptors.response.use(
     if (error.response?.status === 401 && !refresh) {
       refresh = true;
       const data = await reissue();
-      if (data.status === 200) {
+      if (data && data.status === 200) {
         localStorage.setItem("accessToken", `Bearer ${data.data.accessToken}`);
         localStorage.setItem(
           "refreshToken",
