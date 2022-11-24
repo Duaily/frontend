@@ -41,6 +41,9 @@ export const NavbarButtons = styled.div`
   justify-content: space-between;
   margin-top: 30px;
   margin-left: 30px;
+  @media screen and (max-width: 500px) {
+    margin-left: 0;
+  }
   & > p {
     margin-top: 3px;
     font-size: 16px;
@@ -48,7 +51,7 @@ export const NavbarButtons = styled.div`
     color: ${(props) => props.theme.brown_color};
     line-height: 26px;
     @media screen and (max-width: 500px) {
-      font-size: 12px;
+      font-size: 10px;
     }
   }
   & > button {
@@ -60,7 +63,7 @@ export const NavbarButtons = styled.div`
     font-size: 16px;
     font-weight: 300;
     @media screen and (max-width: 500px) {
-      font-size: 12px;
+      font-size: 10px;
     }
     &:hover {
       opacity: 0.8;
