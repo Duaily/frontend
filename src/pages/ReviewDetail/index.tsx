@@ -1,9 +1,5 @@
-import { motion } from "framer-motion";
+import * as S from "./styles";
 import React, { useEffect } from "react";
-import styled from "styled-components";
-import bannerImg from "@assets/reviewBanner.svg";
-import review1Img from "@assets/review1.svg";
-import review2Img from "@assets/review2.svg";
 import { opacityVariants } from "@utils/variants";
 import Comment from "@components/Comment";
 import dayjs from "dayjs";
@@ -55,14 +51,14 @@ function ReviewDetail() {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <Container variants={opacityVariants} initial="initial" animate="mount">
-      <TitleSection>
+    <S.Container variants={opacityVariants} initial="initial" animate="mount">
+      <S.TitleSection>
         <h1>{dummy_review_data.title}</h1>
-      </TitleSection>
-      <div style={{ width: "100%", padding: "0 125px" }}>
-        <Text>{dummy_review_data.content1}</Text>
-        <img src={review1Img} alt="review1" />
-        <Text
+      </S.TitleSection>
+      <S.ContentContainer>
+        <S.Text>{dummy_review_data.content1}</S.Text>
+        <S.DummyImage1 />
+        <S.Text
           style={{
             textAlign: "center",
             color: "#045345",
@@ -72,25 +68,23 @@ function ReviewDetail() {
           }}
         >
           "건강 찾아가기"
-        </Text>
-        <Text>{dummy_review_data.content2}</Text>
-        <img src={review2Img} alt="review2" />
-        <Text>{dummy_review_data.content3}</Text>
-        <Info>
-          <span
-            style={{ marginRight: "40px" }}
-          >{`by. ${dummy_review_data.author}`}</span>
+        </S.Text>
+        <S.Text>{dummy_review_data.content2}</S.Text>
+        <S.DummyImage2 />
+        <S.Text>{dummy_review_data.content3}</S.Text>
+        <S.Info>
+          <span>{`by. ${dummy_review_data.author}`}</span>
           <span>{dayjs(dummy_review_data.createdAt).format("YYYY.MM.DD")}</span>
-        </Info>
-        <Line height="8px" color="black" />
-        <CommentContainer>
+        </S.Info>
+        <S.Line height="8px" color="black" />
+        <S.CommentContainer>
           <h1>총 댓글 수</h1>
-          <Line height="1px" color="black" />
-          <TextAreaBox>
-            <TextArea></TextArea>
-            <Button>등록</Button>
-          </TextAreaBox>
-          <Line
+          <S.Line height="1px" color="black" />
+          <S.TextAreaBox>
+            <S.TextArea></S.TextArea>
+            <S.Button>등록</S.Button>
+          </S.TextAreaBox>
+          <S.Line
             height="1px"
             color="#9A9A9A
 "
@@ -103,106 +97,12 @@ function ReviewDetail() {
               content={comment.content}
             />
           ))}
-        </CommentContainer>
-      </div>
+        </S.CommentContainer>
+      </S.ContentContainer>
       <div style={{ marginBottom: "110px" }} />
       <Footer />
-    </Container>
+    </S.Container>
   );
 }
 
 export default ReviewDetail;
-
-const Container = styled(motion.div)`
-  width: 100%;
-  max-width: 1440px;
-  min-height: 100%;
-  margin: 0 auto;
-`;
-const TitleSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-bottom: 90px;
-  width: 100%;
-  height: 500px;
-  background-image: url(${bannerImg});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  & > h1 {
-    font-size: 50px;
-    font-weight: 700;
-    color: white;
-  }
-`;
-const Text = styled.p`
-  padding: 50px 0;
-  font-size: 20px;
-  line-height: 40px;
-  word-break: break-all;
-  white-space: pre-wrap;
-`;
-const Info = styled(Text)`
-  text-align: end;
-`;
-const Line = styled.div<{ height: string; color: string }>`
-  width: 100%;
-  height: ${(props) => props.height};
-  background-color: ${(props) => props.color};
-  margin: 20px 0;
-`;
-const CommentContainer = styled.div`
-  margin-top: 50px;
-  & > h1 {
-    font-size: 32px;
-    font-weight: 700;
-  }
-`;
-const TextAreaBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  height: 300px;
-  background-color: #f5f5f5;
-  padding: 15px;
-  border: 0;
-  outline: none;
-  resize: none;
-  color: #717171;
-  white-space: pre-wrap;
-  &:focus {
-    outline: none;
-  }
-`;
-const TextArea = styled.textarea`
-  flex-grow: 1;
-  width: 100%;
-  border: 0;
-  padding: 30px;
-  outline: none;
-  resize: none;
-  color: #717171;
-  white-space: pre-wrap;
-  &:focus {
-    outline: none;
-  }
-`;
-const Button = styled.button`
-  align-self: flex-end;
-  width: 135px;
-  height: 50px;
-  margin-top: 15px;
-  background: black;
-  border: none;
-  outline: none;
-  border-radius: 25px;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
-`;

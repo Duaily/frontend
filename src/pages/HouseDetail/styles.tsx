@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import thumbnailImg from "@assets/thumbnail.svg";
+import mapImg from "@assets/map.svg";
 
 export const Container = styled(motion.div)`
   width: 100%;
@@ -17,16 +18,30 @@ export const JumbotronSection = styled.div`
   padding: 40px;
   width: 100%;
   background-color: #0453450d;
+  @media screen and (max-width: 500px) {
+    padding: 30px;
+    flex-direction: column;
+  }
 `;
 export const Thumbnail = styled.div`
   width: 825px;
   height: 555px;
   background-image: url(${thumbnailImg});
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    height: 250px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 `;
 export const ThumbnailIntro = styled.div`
   width: 400px;
   height: 100%;
   margin-left: 40px;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    margin-left: 0;
+  }
 `;
 export const IntroStatus = styled.div`
   display: flex;
@@ -44,6 +59,11 @@ export const Status = styled.div`
   color: white;
   font-size: 24px;
   font-weight: 700;
+  @media screen and (max-width: 500px) {
+    width: 100px;
+    height: 50px;
+    font-size: 18px;
+  }
 `;
 export const InfoTitle = styled.h1`
   margin-bottom: 30px;
@@ -52,9 +72,16 @@ export const InfoTitle = styled.h1`
   line-height: 50px;
   white-space: pre-wrap;
   word-break: break-all;
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+    line-height: 30px;
+  }
 `;
 export const InfoMeta = styled.div`
   font-size: 20px;
+  @media screen and (max-width: 500px) {
+    font-size: 14px;
+  }
 `;
 export const HouseInfo = styled.div`
   display: flex;
@@ -63,6 +90,10 @@ export const HouseInfo = styled.div`
   margin: 50px auto;
   padding: 50px 150px;
   background-color: #f7f7f7;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    padding: 30px;
+  }
 `;
 export const BaseInfo = styled.div`
   & > h1 {
@@ -70,9 +101,18 @@ export const BaseInfo = styled.div`
     font-size: 24px;
     font-weight: 700;
     color: ${(props) => props.theme.green_color};
+    @media screen and (max-width: 500px) {
+      font-size: 18px;
+    }
   }
   & > p {
     margin-bottom: 30px;
+    @media screen and (max-width: 500px) {
+      font-size: 12px;
+      & > b {
+        display: block;
+      }
+    }
   }
 `;
 export const EtcInfo = styled.div`
@@ -80,24 +120,41 @@ export const EtcInfo = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin-right: 150px;
+  @media screen and (max-width: 500px) {
+    margin-right: 0;
+  }
 `;
 export const MapInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 1044px;
   margin: 50px auto;
+  @media screen and (max-width: 500px) {
+    max-width: 300px;
+    padding: 0;
+    align-items: center;
+  }
   & > h1 {
     margin-bottom: 30px;
     font-size: 24px;
     font-weight: 700;
     color: ${(props) => props.theme.green_color};
+    @media screen and (max-width: 500px) {
+      font-size: 20px;
+      align-self: flex-start;
+    }
   }
 `;
-
+export const MapImg = styled.img.attrs({ src: mapImg })`
+  width: 300px;
+`;
 export const ContentData = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 500px) {
+    padding: 30px;
+  }
 `;
 export const Head1 = styled.h1`
   margin-top: 60px;
@@ -105,12 +162,21 @@ export const Head1 = styled.h1`
   font-weight: bold;
   color: ${(props) => props.theme.green_color};
   line-height: 50px;
+  @media screen and (max-width: 500px) {
+    font-size: 24px;
+    line-height: 35px;
+    margin-bottom: 20px;
+  }
 `;
 export const Text = styled.p`
   font-size: 20px;
   line-height: 40px;
   white-space: pre-wrap;
   word-break: break-all;
+  @media screen and (max-width: 500px) {
+    font-size: 16px;
+    line-height: 24px;
+  }
 `;
 export const ContentImage = styled.img`
   align-self: center;
@@ -121,12 +187,19 @@ export const ContentImage = styled.img`
 export const Process = styled.div`
   align-self: center;
   margin: 150px 0;
+  @media screen and (max-width: 500px) {
+    margin: 100px 0;
+  }
   & > h1 {
     margin-bottom: 10px;
     font-size: 24px;
     font-weight: 400;
     line-height: 40px;
     text-align: center;
+    @media screen and (max-width: 500px) {
+      font-size: 20px;
+      line-height: 30px;
+    }
   }
   & > button {
     padding: 20px 35px;
@@ -140,6 +213,13 @@ export const Process = styled.div`
     cursor: pointer;
     &:hover {
       opacity: 0.8;
+    }
+    @media screen and (max-width: 500px) {
+      width: 200px;
+      height: 100px;
+      padding: 10px 25px;
+      font-size: 20px;
+      line-height: 28px;
     }
   }
 `;
