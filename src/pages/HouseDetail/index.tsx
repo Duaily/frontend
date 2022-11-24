@@ -1,6 +1,5 @@
 import { opacityVariants } from "@utils/variants";
 import bookmarkImg from "@assets/bookmark.svg";
-import mapImg from "@assets/map.svg";
 import detailImg1 from "@assets/detail1.svg";
 import detailImg2 from "@assets/detail2.svg";
 import React, { useEffect } from "react";
@@ -77,7 +76,7 @@ function HouseDetail() {
         </S.HouseInfo>
         <S.MapInfo>
           <h1>지도</h1>
-          <img src={mapImg} alt="mapImg" />
+          <S.MapImg />
         </S.MapInfo>
         <S.ContentData>
           <S.Head1>바다 앞에 위치한 포근한 집, 듀얼리 하우스 2호점</S.Head1>
