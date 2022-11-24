@@ -14,6 +14,7 @@ export const Container = styled.div`
   max-width: 1440px;
   background-color: white;
   z-index: 100;
+  margin: 0 auto;
 `;
 export const LogoContainer = styled.div`
   display: grid;
