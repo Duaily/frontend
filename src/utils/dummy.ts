@@ -26,6 +26,36 @@ interface DummySession {
   imageUrl: string;
   title: string;
 }
+interface DummyComment {
+  id: number;
+  author: string;
+  createdAt: Date;
+  content: string;
+}
+
+export const dummy_comment_data: DummyComment[] = [
+  {
+    id: 1,
+    author: "YOLO",
+    createdAt: new Date("2021-09-13"),
+    content: `직장만 10년 동안 다닌 도시 사람입니다.
+저도 요즘 건강 고민이 많아 힐링이 필요한데 글이 정말 도움 많이 되었어요. 감사합니다.`,
+  },
+  {
+    id: 2,
+    author: "해피해",
+    createdAt: new Date("2021-09-23"),
+    content: `듀얼라이프 한 달인데도 변화가 있었다니 부러워요!
+저도 듀얼라이프 곧 시작하려고 하는데 건강해지고 싶어요~`,
+  },
+  {
+    id: 3,
+    author: "DUAL",
+    createdAt: new Date("2022-10-13"),
+    content: `듀얼라이프 효과과 대단한데요?
+마치 나비효과처럼 좋은 일만 생기는 것 같아요!`,
+  },
+];
 
 export const dummy_session_data: DummySession[] = [
   {

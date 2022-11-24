@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface ReviewCardProps {
+  id: number;
   imageUrl: string;
   title: string;
   previewText: string;
@@ -10,8 +12,15 @@ interface ReviewCardProps {
 }
 
 function ReviewCard(props: ReviewCardProps) {
+  const navigate = useNavigate();
+  const onCardClick = (id: number) => {
+    navigate(`/review/${id}`);
+  };
   return (
-    <CardContainer whileHover={{ scale: 1.01, opacity: 0.8 }}>
+    <CardContainer
+      onClick={() => onCardClick(props.id)}
+      whileHover={{ scale: 1.01, opacity: 0.8 }}
+    >
       <CardImage img_src={props.imageUrl} />
       <CardInfoBox>
         <CardTitle>{props.title}</CardTitle>
