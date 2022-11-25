@@ -68,13 +68,13 @@ function Navbar({ clickedMenu, setClickedMenu }: NavbarProps) {
             <S.NavbarButtons>
               <button>
                 마이
-                <br />
+                {window.innerWidth < 500 ? <br /> : null}
                 페이지
               </button>
               <p>|</p>
               <button onClick={onLogout}>
                 로그
-                <br />
+                {window.innerWidth < 500 ? <br /> : null}
                 아웃
               </button>
             </S.NavbarButtons>
